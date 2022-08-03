@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
 
     // Create a vector of inputs.
     std::vector<torch::jit::IValue> inputs;
-    inputs.push_back(torch::ones({1, 3, 224, 224}));
+    inputs.push_back(torch::rand({1, 3, 224, 224}));
 
     // Execute the model and turn its output into a tensor.
     at::Tensor output = module.forward(inputs).toTensor();
@@ -39,11 +39,13 @@ int main(int argc, char* argv[]) {
         at::Tensor output = module.forward(inputs).toTensor();
     }
 
+    int repetitions = 1000;
+
     std::chrono::time_point<std::chrono::high_resolution_clock> start_point, end_point; // creating time points
 
     start_point = std::chrono::high_resolution_clock::now();
 
-    for (int i=0; i<1000; i++) {
+    for (int i=0; i<repetitions; i++) {
         at::Tensor output = module.forward(inputs).toTensor();
     }
 
@@ -51,10 +53,9 @@ int main(int argc, char* argv[]) {
 
     auto start = std::chrono::time_point_cast<std::chrono::milliseconds>(start_point).time_since_epoch().count(); 
 	// casting the time point to milliseconds and measuring the time since time epoch
+    auto end = std::chrono::time_point_cast<std::chrono::milliseconds>(end_point).time_since_epoch().count();
 	
-	auto end = std::chrono::time_point_cast<std::chrono::milliseconds>(end_point).time_since_epoch().count();
-	
-    std::cout<<"Mean time: "<<(end-start)/1000<<"ms"<<"\n";
+    std::cout<<"Mean time: "<<(end-start)/float(repetitions)<<"ms"<<"\n";
 	std::cout<<"Total time: "<<(end-start)<<"ms"<<"\n";
 
     return 0;

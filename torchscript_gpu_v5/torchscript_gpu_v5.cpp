@@ -55,8 +55,7 @@ int main(int argc, char* argv[]) {
 
     auto start = std::chrono::time_point_cast<std::chrono::milliseconds>(start_point).time_since_epoch().count(); 
 	// casting the time point to milliseconds and measuring the time since time epoch
-	
-	auto end = std::chrono::time_point_cast<std::chrono::milliseconds>(end_point).time_since_epoch().count();
+    auto end = std::chrono::time_point_cast<std::chrono::milliseconds>(end_point).time_since_epoch().count();
 	
     std::cout<<"Mean time: "<<(end-start)/float(repetitions)<<"ms"<<"\n";
 	std::cout<<"Total time: "<<(end-start)<<"ms"<<"\n";
