@@ -1,5 +1,5 @@
 """
-How to use Torrchscript to convert Modules
+How to use Torchscript to convert Modules
 """
 
 import torch  # This is all you need to use both PyTorch and TorchScript!

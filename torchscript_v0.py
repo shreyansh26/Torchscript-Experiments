@@ -1,5 +1,5 @@
 """
-How to use Torrchscript
+How to use Torchscript
 """
 
 import torch  # This is all you need to use both PyTorch and TorchScript!
